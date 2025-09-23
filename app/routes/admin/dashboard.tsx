@@ -1,11 +1,10 @@
-import {Header} from "../../../components";
+import {Header, StatsCard, TripCard} from "../../../components";
+import { user, dashboardStats, allTrips } from "~/constants";
+import {start} from "node:repl";
+
+const { totalUsers, usersJoined, totalTrips, tripsCreated, userRole } = dashboardStats;
 
 const Dashboard = () => {
-    const user = {
-        name: 'Matthew',
-        email: 'test@test.com',
-        imageUrl: '/assets/images/david.webp',
-    }
 
     return (
         <main className='dashboard wrapper'>
@@ -14,7 +13,36 @@ const Dashboard = () => {
                 description='Track activity, trends and popular destinations in real time'
             />
 
-            Dashboard page contents
+            <section className='flex flex-col gap-6'>
+                <div className='grid grid-cols-1 md:grid-cols-3 gap-6 w-full'>
+                     <StatsCard
+                        headerTitle='Total Users'
+                        total={totalUsers}
+                        currentMonthCount={usersJoined.currentMonth}
+                        lastMonthCount={usersJoined.lastMonth}
+                     />
+                    <StatsCard
+                        headerTitle='Total Trips'
+                        total={totalUsers}
+                        currentMonthCount={tripsCreated.currentMonth}
+                        lastMonthCount={tripsCreated.lastMonth}
+                     />
+                    <StatsCard
+                        headerTitle='Active Users'
+                        total={userRole.total}
+                        currentMonthCount={userRole.currentMonth}
+                        lastMonthCount={userRole.lastMonth}
+                     />
+                </div>
+            </section>
+            <section className='container'>
+                <h1 className='text-xl font-semibold text-dark-100'>Created Trips</h1>
+                <div className='trip-grid'>
+                    {allTrips.slice(0, 4).map((trip) => (
+                     <TripCard />
+                    ))}
+                </div>
+            </section>
         </main>
     )
 }

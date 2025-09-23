@@ -1,13 +1,9 @@
 import {Link, NavLink} from "react-router";
 import {sidebarItems} from "~/constants";
 import {cn} from "~/lib/utils";
+import { user } from '~/constants'
 
 const NavItems = ({ handleClick }: { handleClick?: () => void }) => {
-    const user = {
-        name: 'Matthew',
-        email: 'test@test.com',
-        imageUrl: '/assets/images/david.webp',
-    }
 
     return (
         <section className='nav-items'>
